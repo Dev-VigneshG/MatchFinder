@@ -15,7 +15,12 @@ public class MatchFinder {
 	public void addDetails() {
 		System.out.println("Enter Name of The Person:");
 		String name = scanner.nextLine();
-		Person newPerson = new Person(name);
+		Person newPerson;
+		if (persons.containsKey(name)) {
+			newPerson = persons.get(name);
+		} else {
+			newPerson = new Person(name);
+		}
 		System.out.println("Enter Gender of The Person:");
 		String gender = scanner.nextLine();
 		newPerson.setGender(gender);
@@ -56,6 +61,7 @@ public class MatchFinder {
 						person.addBrother(newPerson);
 					} else {
 						person.addSister(newPerson);
+
 					}
 				} else {
 					newPerson.addSister(person);
@@ -72,6 +78,7 @@ public class MatchFinder {
 	}
 
 	public void findMatch() {
+
 		System.out.println("Enter Your Name to Find Your Match:");
 		String name = scanner.nextLine();
 		Person person;
@@ -93,12 +100,14 @@ public class MatchFinder {
 					}
 				}
 			} else {
+
 				for (Person aunty : person.father.sisters) {
 					for (Person boy : aunty.sons) {
 						System.out.println(boy.name);
 					}
 				}
 				for (Person uncle : person.mother.brothers) {
+
 					for (Person boy : uncle.sons) {
 						System.out.println(boy.name);
 					}
